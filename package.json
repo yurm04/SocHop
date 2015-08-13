@@ -1,0 +1,26 @@
+{
+  "name": "sochop",
+  "version": "0.1.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "body-parser": "^1.13.3",
+    "mongodb": "^2.0.40"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yurm04/SocHop.git"
+  },
+  "author": "Yuraima Estevez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yurm04/SocHop/issues"
+  },
+  "homepage": "https://github.com/yurm04/SocHop#readme"
+}
