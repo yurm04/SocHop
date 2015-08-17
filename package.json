@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.13.3",
     "body-parser": "^1.13.3",
-    "mongodb": "^2.0.40"
+    "express": "^4.13.3",
+    "mongodb": "^2.0.41",
+    "mongoose": "^4.1.3"
   },
   "devDependencies": {},
   "scripts": {
