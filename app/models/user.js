@@ -1,7 +1,7 @@
 // user.js ================================================
 
 // load mongoose package
-var mongoos = require('mongoose');
+var mongoose = require('mongoose');
 
 // User data schema definition
 var userSchema = new mongoose.Schema( {
@@ -10,4 +10,4 @@ var userSchema = new mongoose.Schema( {
 });
 
 // Export model
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);
