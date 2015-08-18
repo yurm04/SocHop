@@ -4,7 +4,7 @@ var express     = require('express'),
 
     // DB stuff
     mongoose    = require('mongoose'),
-    dbhost      = 'mongodb://localhost:27017/sochop',
+    dbhost      = 'mongodb://127.0.0.1:27017/sochop',
 
     // User model
     User = require('./app/models/user');
