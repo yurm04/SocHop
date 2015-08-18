@@ -1,4 +1,4 @@
-angular.module('SocHopApp', ['ngRoute'])
+var sochopApp = angular.module('SocHopApp', ['ngRoute'])
   .config( function($routeProvider, $locationProvider) {
     $routeProvider
       .when('/login', {
