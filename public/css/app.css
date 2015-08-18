@@ -1,0 +1,8 @@
+/* Overriding bootstrap classes */
+.center {
+  float: none;
+}
+
+.form-group .btn {
+  margin-top: 15px;
+}
