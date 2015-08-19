@@ -6,7 +6,8 @@ var mongoose = require('mongoose');
 // User data schema definition
 var userSchema = new mongoose.Schema( {
   username : String,
-  password : String
+  password : String,
+  token    : String
 });
 
 // Export model
