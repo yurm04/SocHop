@@ -23,12 +23,16 @@
   <!-- <script src="src/controllers.js"></script> -->
 </head>
 <body>
+  
+  <div navbar class="navbar navbar-inverse navbar-fixed-top"></div>
   <div class="container">
-    <div navbar class="navbar navbar-default navbar-fixed-top"></div>
-    <div class="row">
-      <!-- ANGULAR APP VIEW -->
-      <div class="col-md-12" ng-view></div>
-      <!-- ANGULAR APP VIEW -->
+    <div class="bs-component">
+      <div class="row">
+
+        <!-- ANGULAR APP VIEW -->
+        <div class="col-md-12 clearfix" ng-view></div>
+        <!-- ANGULAR APP VIEW -->
+      </div>
     </div>
   </div>
 

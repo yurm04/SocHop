@@ -1,0 +1,10 @@
+<div class="eventlist" ng-model="event">
+  <div class="panel panel-default" ng-repeat="event in events">
+    <h3 class="panel-title">{{event.name}}</h3>
+    <div class="panel-body">
+      <div class="eventDescription">{{event.description}}</div>
+      <div class="eventTime">{{event.startTime}}</div>
+      <div class="attendance">{{event.numAttending}}</div>
+    </div>
+  </div>
+</div>

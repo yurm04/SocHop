@@ -1,4 +1,8 @@
 /* Overriding bootstrap classes */
+body {
+  padding-top: 100px;
+}
+
 .center {
   float: none;
 }
@@ -6,3 +10,4 @@
 .form-group .btn {
   margin-top: 15px;
 }
+
