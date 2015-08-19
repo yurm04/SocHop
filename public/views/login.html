@@ -1,19 +1,29 @@
 <div class="well well-lg col-md-6 center center-block">
-  <form class="form-horizontal" ng-controller="LoginController" novalidate>
+  <form name="loginForm" class="form-horizontal" ng-controller="LoginController" novalidate>
     <fieldset>
-      <div class="form-group">
+      <div class="form-group" ng-class="{ 'has-error':loginForm.inputEmail.$invalid && loginForm.inputEmail.$dirty}">
         <label for="inputEmail" class="control-label col-md-2">Email</label>
         <div class="col-md-10">
-          <input type="email" name="inputEmail" class="form-control input-lg" id="inputEmail" placeholder="you@email.com"
+          <input
+          id="inputEmail" 
+          type="email" 
+          name="inputEmail" 
+          class="form-control input-lg" 
+          placeholder="you@email.com"
           ng-model="user.username"
-          ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" 
+          ng-pattern="emailPattern"
+          ng-require="true"
           >
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group" ng-class="{ 'has-error':loginForm.inputPassword.$invalid && loginForm.inputPassword.$dirty }">
         <label for="inputPassword" class="control-label col-md-2">Password</label>
         <div class="col-md-10">
-          <input type="password" name="inputPassword" class="form-control input-lg" id="inputPassword"
+          <input 
+          id="inputPassword"
+          type="password" 
+          name="inputPassword" 
+          class="form-control input-lg"
           ng-model="user.password"
           ng-required="true"
           >
@@ -21,7 +31,10 @@
       </div>
       <div class="form-group">
         <div class="col-md-12">
-          <button ng-click="validate()" class="btn btn-primary btn-lg center-block">Let's Go</button>
+          <button
+          ng-click="validate()"
+          ng-disabled="loginForm.$invalid" 
+          class="btn btn-primary btn-lg center-block">Let's Go</button>
         </div>
       </div>
     </fieldset>

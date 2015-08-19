@@ -18,14 +18,13 @@
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/angular-route/angular-route.min.js"></script>
   <script src="src/app.js"></script>
+  <script src="src/directives/navbar.js"></script>
   <script src="src/controllers/LoginController.js"></script>
   <!-- <script src="src/controllers.js"></script> -->
 </head>
 <body>
   <div class="container">
-    <div class="page-header">
-      <h1></h1>
-    </div>
+    <div navbar class="navbar navbar-default navbar-fixed-top"></div>
     <div class="row">
       <!-- ANGULAR APP VIEW -->
       <div class="col-md-12" ng-view></div>

@@ -1,29 +1,31 @@
-sochopApp.controller('LoginController', function ($scope) {
+sochopApp.controller('LoginController', function ($scope, $location) {
+  // email pattern regex
+  $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
   // initialize user object with empty values
-  $scope.user = {
-    username : '',
-    password : ''
-  };
+  $scope.user = {};
 
   // Validation -------------
   $scope.validate = function() {
-    var valid = true;
+    console.log('hello');
+    $location.path('/');
+    // var valid = true;
 
-    if ( !validateUser() ) {
-      valid = false;
-      // Is this how you add class to element?
-      angular.element("#inputEmail").addClass('has-warning');
-    }
+    // if ( !validateUser() ) {
+    //   valid = false;
+    //   // Is this how you add class to element?
+    //   angular.element("#inputEmail").parent(".form-group").addClass('has-warning');
+    // }
 
-    if ( !validatePassword() ) {
-      valid = false;
-      angular.element("#inputPassword").addClass('has-warning');
-    }
+    // if ( !validatePassword() ) {
+    //   valid = false;
+    //   angular.element("#inputPassword").parent(".form-group").addClass('has-warning');
+    // }
 
-    if ( valid ) {
-      console.log('Send to API');
-      // send to API using service
-    }
+    // if ( valid ) {
+    //   console.log('Send to API');
+    //   // send to API using service
+    // }
   };
 
   // username validation
@@ -55,3 +57,5 @@ sochopApp.controller('LoginController', function ($scope) {
     return true;
   }
 });
+
+

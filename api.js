@@ -38,4 +38,13 @@ userRouter
     } );
   });
 
+// Events route ===========================================
+var eventsRouter = router.route('/event');
+
+eventsRouter
+  .get( function(req, res) {
+    Event.find(function() {
+      res.json(events);
+    });
+  });
 module.exports = router;
