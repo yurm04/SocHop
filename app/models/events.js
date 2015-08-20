@@ -8,8 +8,7 @@ var eventSchema = new mongoose.Schema({
   name : String,
   description : { type: String, default: null },
   startTime : Date,
-  endTime : { type: Date, default: null },
-  location : mongoose.Schema.Types.ObjectId,
+  location : { lattitude: Number, longitude: Number },
 });
 
 

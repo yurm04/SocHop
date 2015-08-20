@@ -1,3 +1,13 @@
-<div eventlist class="well well-lg col-md-5" ng-controller="AttendController">
-  
+<div class="well well-lg col-md-5" ng-controller="AttendController">
+  <legend>Goin On Near You</legend>
+  <div class="panel panel-primary" ng-repeat="event in events">
+    <div class="panel-heading">{{event.name}}</div>
+    <div class="panel-body">
+      <p><span class="custom-label">Description:</span> {{event.description}}</p>
+      <p><span class="custom-label">Date:</span> {{event.date | date: 'M/d h:mma'}}</p>
+      <p><span class="custom-label">Attending:</span> {{event.numAttending}}</p>
+    </div>
+  </div>
 </div>
+
+<div class="well well-lg col-md-7"></div>

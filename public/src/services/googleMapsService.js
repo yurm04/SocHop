@@ -1,0 +1,3 @@
+sochopApp.facory("mapService", function() {
+  
+});
