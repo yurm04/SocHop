@@ -1,5 +1,5 @@
 <div class="panel panel-default" ng-repeat="event in events">
-    <h3 class="panel-title">{{eventInfo.name}}</h3>
+    <h3 class="panel-title" ng-click="displayMap(index)">{{eventInfo.name}}</h3>
     <div class="panel-body">
       <div class="eventDescription">{{eventInfo.description}}</div>
       <div class="eventTime">{{eventInfo.startTime}}</div>

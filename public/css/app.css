@@ -15,3 +15,8 @@ body {
   font-weight: 500;
   margin-right: 5px;
 }
+
+#map {
+  height: 500px;
+  background-color: blue;
+}

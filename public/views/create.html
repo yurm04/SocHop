@@ -1,0 +1,58 @@
+<div class="well well-lg col-md-8 center center-block">
+  <form name="createForm" class="form-horizontal" ng-controller="CreateController" novalidate>
+    <fieldset>
+      <legend>Create New Event</legend>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputName.$invalid && createForm.inputName.$dirty}">
+        <label for="inputName" class="control-label col-md-2">Event Name:</label>
+        <div class="col-md-10">
+          <input
+          id="inputName" 
+          type="text" 
+          name="inputName" 
+          class="form-control input-lg" 
+          ng-model="event.name"
+          ng-required="true"
+          >
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputDescription.$invalid && createForm.inputDescription.$dirty }">
+        <label for="inputDescription" class="control-label col-md-2">Description:</label>
+        <div class="col-md-10">
+          <textarea 
+          id="inputDescription"
+          rows="3"
+          name="inputDescription" 
+          class="form-control"
+          ng-model="event.description"
+          ng-required="true"
+          ></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputDate" class="col-md-2">Event Date</label>
+        <div class="col-md-10">
+          <div class="radio">
+            <label>
+              <input type="radio" name="inputDate" id="inputDateToday" value="Today" checked="true">
+              Today
+            </label>
+          </div>
+          <div class="radio">
+            <label>
+              <input type="radio" name="inputDate" id="inputDateTomorrow" value="Tomorrow" checked="">
+              Tomorrow
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-12">
+          <button
+          ng-click="submit"
+          ng-disabled="createForm.$invalid" 
+          class="btn btn-primary btn-lg center-block">CREATE</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

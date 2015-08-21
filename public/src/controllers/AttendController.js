@@ -1,4 +1,4 @@
-sochopApp.controller('AttendController', function($scope) {
+sochopApp.controller('AttendController', function($scope, $window) {
   // $scope.events.test = 'HELLO';
   $scope.events = [{
     name: 'Test Name',
@@ -12,83 +12,90 @@ sochopApp.controller('AttendController', function($scope) {
     numAttending: 7
   }];
 
+  var eventLocation = {};
+  $scope.$watch('eventLocation', displayLocation(eventLocation));
+
+  function selectEvent(index) {
+    var selected = $scope.events[index];
+    $scope.eventLocation = selected.location.coords;
+  }
+
   /****************************************************************
   Google Maps
   ****************************************************************/
   window.onload = init;
+  console.log('before');
+  var lattitude, longitude, map;
+console.log('after');
+  var options = {
+        enableHighAccuracy : true,
+        timeout : 50000,
+        maximumAge : 0
+      };
 
-  // current location
-  var latitude;
-  var logitude;
-
-  // Google map
-  var map = null;
-
-  // Path
-  var path = [];
-
-  var lastMarker = null;
-
-  // Onload event handler
   function init() {
-    var startButton = document.getElementById("startButton"); // query for check location button
-    startButton.onclick = getCurrentLocation;  // register event handler
+    // getCurrentLocation();
+    var options = {
+                enableHighAccuracy : true,
+                timeout : 50000,
+                maximumAge : 0
+              };
+              
+              function displayLocation(position) {
+                console.log('discplay location coords 1 ' + position);
+              }
+
+              function handleError(err) {
+                console.log(err);
+              }
+
+              /**
+               * Gets current position of device
+               * sets displayLocation callback function
+               * handleError
+               * function options
+               */
+              navigator.geolocation.getCurrentPosition(displayLocation, handleError, options);
   }
 
   function getCurrentLocation() {
-    // disable start button
-    this.disabled = true;
-
+    // Navigator options
     var options = {
       enableHighAccuracy : true,
       timeout : 50000,
       maximumAge : 0
     };
-    
-    /**
-     * Gets current position of device
-     * sets displayLocation callback function
-     * handleError
-     * function options
-     */
     navigator.geolocation.getCurrentPosition(displayLocation, handleError, options);
-    setInterval(updateMyLocation, 5000);
   }
 
-  // Callback function for displaying the location on the google map
+  // Show position
   function displayLocation(position) {
-    latitude      = position.coords.latitude;
-    longitude     = position.coords.longitude;
+    // console.log('hello');
+    console.log('display location coords 2' + position.coords);
+    // console.log(position.coords);
+    // latitude      = position.coords.latitude;
+    // longitude     = position.coords.longitude;
 
-    document.getElementById("latitude").innerHTML = "Latitude: " + latitude;
-    document.getElementById("longitude").innerHTML = "Longitude: " + longitude;
-
-    if (firstGo === true) {
-      showOnMap(position.coords);
-      firstGo = false;
-    }
+    // showOnMap();
   }
 
-  // Sets error message based on error code
   function handleError(err) {
-    switch(err.code) {
-      case 1:
-        updateStatus("The user denied permission");
-          break;
-      case 2:
-        updateStatus("Position is unavailable");
-          break;
-      case 3:
-        updateStatus("Timed out");
-        break;
-    }
+    console.log(err);
+
+    // switch(err.code) {
+    //   case 1:
+    //     updateStatus("The user denied permission");
+    //       break;
+    //   case 2:
+    //     updateStatus("Position is unavailable");
+    //       break;
+    //   case 3:
+    //     updateStatus("Timed out");
+    //     break;
+    // }
   }
 
-  //  Updates message for errors
-  function updateStatus(message) {
-    document.getElementById("status").innerHTML = "<strong>Error</strong>: " + message;
-  }
-
+  // Show on map the position pass
   function showOnMap(position) {
     var googlePosition = new google.maps.LatLng(position.latitude, position.longitude);
 
@@ -103,10 +110,10 @@ sochopApp.controller('AttendController', function($scope) {
     // Add marker
     var title = "Location Details";
     var content = "Lat: " + position.latitude + " , Long: " + position.longitude;
-    addMarker(map, googlePosition, title, content);
-
+    addMarker(map, googlePosition, 'Current Position', 'You Are Here');
   }
 
+  // Add marker to map
   function addMarker(map, markerPosition, title, content) {
     var options = {
       position: markerPosition,
@@ -130,40 +137,5 @@ sochopApp.controller('AttendController', function($scope) {
     return marker;
   }
 
-  function updateMyLocation() {
-    path = [];
-
-    // first point
-    var latlong = new google.maps.LatLng(latitude, longitude);
-    path.push(latlong);
-
-    latitude += Math.random() / 100;
-    longitude -= Math.random() / 100;
-
-    // next
-    latlong = new google.maps.LatLng(latitude, longitude);
-    path.push(latlong);
-
-    var line = new google.maps.Polyline({
-      path : path,
-      strokeColor : '#0000ff',
-      strokeOpacity : 1.0,
-      strokeWeight : 3
-    });
-    line.setMap(map);
-
-    map.panTo(latlong);
-
-    if (lastMarker)
-          lastMarker.setMap(null);
-      // add the new marker
-    lastMarker = addMarker(map, latlong, "Your new location", "You moved to: " + latitude + ", " + longitude);
-    var position = {
-      coords : {
-        latitude : latitude,
-        longitude : longitude
-      }
-    };
-    displayLocation(position);
-  }
+  
 });

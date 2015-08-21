@@ -8,7 +8,17 @@ var eventSchema = new mongoose.Schema({
   name : String,
   description : { type: String, default: null },
   startTime : Date,
-  location : { lattitude: Number, longitude: Number },
+  location: {
+      address1: String,
+      address2: String,
+      city: String,
+      state: String,
+      zipcode: String,
+      coords: {
+        lattitude: Number,
+        longitude: Number
+      }
+    }
 });
 
 
