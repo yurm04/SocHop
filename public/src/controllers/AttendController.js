@@ -4,138 +4,130 @@ sochopApp.controller('AttendController', function($scope, $window) {
     name: 'Test Name',
     description: 'This is a test Description',
     date: Date.now(),
-    numAttending: 5
+    numAttending: 5,
+    location: {
+      name: 'A bar',
+      latitude: 40.805,
+      longitude: -73.94
+    }
   }, {
     name: 'Test Name 2',
     description: 'This is a second test Description',
     date: Date.now(),
-    numAttending: 7
+    numAttending: 7,
+    location: {
+      name: 'A restaurant',
+      latitude: 40.81,
+      longitude: -73.92
+    }
   }];
 
+  var currentLocation = {};
+
   var eventLocation = {};
-  $scope.$watch('eventLocation', displayLocation(eventLocation));
+  // $scope.$watch('eventLocation', displayLocation(eventLocation));
 
-  function selectEvent(index) {
-    var selected = $scope.events[index];
-    $scope.eventLocation = selected.location.coords;
-  }
+  $scope.selectEvent = function(index) {
+    console.log("Event selected " + index);
+    // var selected = $scope.events[index];
+    // $scope.eventLocation = selected.location.coords;
+  };
 
-  /****************************************************************
-  Google Maps
-  ****************************************************************/
-  window.onload = init;
-  console.log('before');
-  var lattitude, longitude, map;
-console.log('after');
-  var options = {
-        enableHighAccuracy : true,
-        timeout : 50000,
-        maximumAge : 0
-      };
+  // Google Map -------------------------------------------
 
-  function init() {
-    // getCurrentLocation();
-    var options = {
-                enableHighAccuracy : true,
-                timeout : 50000,
-                maximumAge : 0
-              };
-              
-              function displayLocation(position) {
-                console.log('discplay location coords 1 ' + position);
-              }
+  google.maps.event.addListenerOnce(map, 'idle', function(){
+    console.log('map fully loaded');
+  });
 
-              function handleError(err) {
-                console.log(err);
-              }
+  // Map options
+  var mapOptions = {
 
-              /**
-               * Gets current position of device
-               * sets displayLocation callback function
-               * handleError
-               * function options
-               */
-              navigator.geolocation.getCurrentPosition(displayLocation, handleError, options);
-  }
+  };
 
-  function getCurrentLocation() {
-    // Navigator options
-    var options = {
+  // current location of device
+  var getCurrentLocation = function() {
+    console.log('Getting current location');
+    // navigator options
+    var navigatorOptions = {
       enableHighAccuracy : true,
       timeout : 50000,
       maximumAge : 0
     };
-    navigator.geolocation.getCurrentPosition(displayLocation, handleError, options);
-  }
 
-  // Show position
-  function displayLocation(position) {
-    // console.log('hello');
-    console.log('display location coords 2' + position.coords);
-    // console.log(position.coords);
-    // latitude      = position.coords.latitude;
-    // longitude     = position.coords.longitude;
+    navigator.geolocation.getCurrentPosition(displayLocation, handleError, navigatorOptions);
+  };
 
-    // showOnMap();
-  }
+  // Error handler
+  var handleError = function(err) {
+    console.log('An error occured ' + err);
+  };
 
-  function handleError(err) {
-    console.log(err);
+  // display the passed location
+  var displayLocation = function(position) {
+    console.log(position);
+    if (!$scope.map) {
+      console.log('scope.map does not exist');
+      showOnMap(position);
+    }
+  };
 
-    // switch(err.code) {
-    //   case 1:
-    //     updateStatus("The user denied permission");
-    //       break;
-    //   case 2:
-    //     updateStatus("Position is unavailable");
-    //       break;
-    //   case 3:
-    //     updateStatus("Timed out");
-    //     break;
-    // }
-  }
-
-  // Show on map the position pass
-  function showOnMap(position) {
+  var showOnMap = function (position) {
+    console.log('showOnMap');
     var googlePosition = new google.maps.LatLng(position.latitude, position.longitude);
 
     var mapOptions = {
-      zoom: 15,
-      center: googlePosition,
+      zoom: 12,
+      center: googlePosition
     };
 
-    var mapElement = document.getElementById("map");
-    map = new google.maps.Map(mapElement, mapOptions);
+    $scope.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     // Add marker
-    var title = "Location Details";
-    var content = "Lat: " + position.latitude + " , Long: " + position.longitude;
-    addMarker(map, googlePosition, 'Current Position', 'You Are Here');
-  }
+    var title = "Around You";
+    var content = "You are here!";
 
-  // Add marker to map
-  function addMarker(map, markerPosition, title, content) {
-    var options = {
+    addMarker($scope.map, googlePosition, title, content);
+  };
+
+  var createMarkers = function () {
+    var markerOptions = {};
+    angular.forEach($scope.events, function(currentEvent, index) {
+      var googlePosition = google.maps.LatLng(currentEvent.location.latitude, currentEvent.location.longitude);
+      markerOptions = {
+        position: googlePosition,
+        map: $scope.map,
+        title: currentEvent.name,
+        content: currentEvent.location.name
+      };
+    });
+  };
+  
+  var addMarker = function (map, markerPosition, title, content) {
+    console.log('addMarker');
+    var markerOptions = {
       position: markerPosition,
       map: map,
       title: title,
       clickable: true
     };
-    var marker = new google.maps.Marker(options);
 
-    var popupWindowOptions = {
+    var marker = new google.maps.Marker(mapOptions);
+
+    var popupOptions = {
       content: content,
       position: markerPosition
     };
 
-    var popupWindow = new google.maps.InfoWindow(popupWindowOptions);
+    var popup = new google.maps.InfoWindow(popupOptions);
 
     google.maps.event.addListener(marker, 'click', function() {
-      popupWindow.open(map);
+      popup.open(map);
     });
 
     return marker;
-  }
+  };
 
+
+  getCurrentLocation();
   
 });

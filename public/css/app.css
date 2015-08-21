@@ -16,7 +16,15 @@ body {
   margin-right: 5px;
 }
 
+.custom-label-location {
+  font-style: italic;
+}
+
 #map {
   height: 500px;
-  background-color: blue;
+  background-color: #f9f9f9;
+}
+
+.map-container {
+  height: 100%;
 }
