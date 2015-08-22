@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 // create event schema
 var eventSchema = new mongoose.Schema({
-  host : mongoose.Schema.Types.ObjectId,    // User ID
+  owner : mongoose.Schema.Types.ObjectId,    // User ID
   name : String,
   description : { type: String, default: null },
   startTime : Date,

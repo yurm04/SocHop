@@ -33,22 +33,107 @@
         <div class="col-md-10">
           <div class="radio">
             <label>
-              <input type="radio" name="inputDate" id="inputDateToday" value="Today" checked="true">
+              <input type="radio" name="inputDate" id="inputDateToday" value="Today" checked="true" ng-model="date">
               Today
             </label>
           </div>
           <div class="radio">
             <label>
-              <input type="radio" name="inputDate" id="inputDateTomorrow" value="Tomorrow" checked="">
+              <input type="radio" name="inputDate" id="inputDateTomorrow" value="Tomorrow" checked="" ng-model="date">
               Tomorrow
             </label>
           </div>
         </div>
       </div>
       <div class="form-group">
+      <label for="select" class="col-lg-2 control-label">Time</label>
+      <div class="col-lg-10">
+        <select class="form-control col-md-2" id="selectHour">
+          <option ng-repeat="hour in hours" value="time" ng-selected="{{hour === selectedHour}}">{{hour}}</option>
+        </select>
+        
+        <select class="form-control col-md-2" id="selectMin">
+          <option ng-repeat="min in minutes" value="time" ng-selected="{{min === selectedMin}}">{{min}}</option>
+          <!-- <option>00</option>
+          <option>15</option>
+          <option>30</option>
+          <option>45</option> -->
+        </select>
+        <select class="form-control col-md-2" id="selectMin">
+          <option ng-repeat="ap in ampm" value="time" ng-selected="{{ap === selectedAmPm}}">{{ap}}</option>
+        </select>
+      </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputAddress.$invalid && createForm.inputAddress.$dirty}">
+        <label for="inputAddress" class="control-label col-md-2">Street:</label>
+        <div class="col-md-10">
+          <input
+          id="inputAddress" 
+          type="text" 
+          name="inputAddress" 
+          class="form-control input-lg" 
+          ng-model="event.location.address1"
+          ng-required="true"
+          >
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputCity.$invalid && createForm.inputCity.$dirty}">
+        <label for="inputCity" class="control-label col-md-2">City:</label>
+        <div class="col-md-10">
+          <input
+          id="inputCity" 
+          type="text" 
+          name="inputCity" 
+          class="form-control input-lg" 
+          ng-model="event.location.city"
+          ng-required="true"
+          >
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputState.$invalid && createForm.inputState.$dirty}">
+        <label for="inputState" class="control-label col-md-2">State:</label>
+        <div class="col-md-10">
+          <input
+          id="inputState" 
+          type="text" 
+          name="inputState" 
+          class="form-control input-lg" 
+          ng-model="event.location.state"
+          ng-required="true"
+          >
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputZipcode.$invalid && createForm.inputZipcode.$dirty}">
+        <label for="inputZipcode" class="control-label col-md-2">Zip Code:</label>
+        <div class="col-md-10">
+          <input
+          id="inputZipcode" 
+          type="text" 
+          name="inputZipcode" 
+          class="form-control input-lg" 
+          ng-model="event.location.zipcode"
+          ng-required="true"
+          >
+        </div>
+      </div>
+      <div class="form-group" ng-class="{ 'has-error':createForm.inputLocationName.$invalid && createForm.inputLocationName.$dirty}">
+        <label for="inputLocationName" class="control-label col-md-2">Location Name:</label>
+        <div class="col-md-10">
+          <input
+          id="inputLocationName" 
+          type="text" 
+          name="inputLocationName" 
+          class="form-control input-lg" 
+          ng-model="event.location.name"
+          ng-required="true"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
         <div class="col-md-12">
           <button
-          ng-click="submit"
+          ng-click="submit()"
           ng-disabled="createForm.$invalid" 
           class="btn btn-primary btn-lg center-block">CREATE</button>
         </div>

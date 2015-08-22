@@ -1,28 +1,39 @@
-sochopApp.controller('AttendController', function($scope, $window) {
+sochopApp.controller('AttendController', function($scope, $window, sochopService) {
   // $scope.events.test = 'HELLO';
-  $scope.events = [{
-    name: 'Test Name',
-    description: 'This is a test Description',
-    date: Date.now(),
-    numAttending: 5,
-    location: {
-      name: 'A bar',
-      latitude: 40.805,
-      longitude: -73.94
-    }
-  }, {
-    name: 'Test Name 2',
-    description: 'This is a second test Description',
-    date: Date.now(),
-    numAttending: 7,
-    location: {
-      name: 'A restaurant',
-      latitude: 40.81,
-      longitude: -73.92
-    }
-  }];
+  // $scope.events = [{
+  //   name: 'Test Name',
+  //   description: 'This is a test Description',
+  //   date: Date.now(),
+  //   numAttending: 5,
+  //   location: {
+  //     name: 'A bar',
+  //     latitude: 40.805,
+  //     longitude: -73.94
+  //   }
+  // }, {
+  //   name: 'Test Name 2',
+  //   description: 'This is a second test Description',
+  //   date: Date.now(),
+  //   numAttending: 7,
+  //   location: {
+  //     name: 'A restaurant',
+  //     latitude: 40.81,
+  //     longitude: -73.92
+  //   }
+  // }];
+
+  $scope.events = {};
 
   var currentLocation = {};
+
+  var init = function() {
+    console.log('init');
+    sochopService.getEvents( function(events) {
+      console.log(events);
+      $scope.events = events;
+    });
+
+  };
 
   var eventLocation = {};
   // $scope.$watch('eventLocation', displayLocation(eventLocation));
@@ -129,5 +140,5 @@ sochopApp.controller('AttendController', function($scope, $window) {
 
 
   getCurrentLocation();
-  
+  init();
 });

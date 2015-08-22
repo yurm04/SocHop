@@ -7,7 +7,8 @@ var express     = require('express'),
     dbhost      = 'mongodb://127.0.0.1:27017/sochop',
 
     // User model
-    User = require('./app/models/user');
+    User = require('./app/models/user'),
+    Event = require('./app/models/events');
 
 // Connecting to DB
 mongoose.connect(dbhost);
@@ -96,23 +97,13 @@ signupRoute.post(function(req, res) {
   });
 });
 
-// User route ==============================================
-var userRouter = router.route('/user');
-
-userRouter
-  .get( function(req, res) {
-    User.find( { username : 'yurm04@gmail.com' }, function(err, users) {
-      // console.log(users[0]);
-      res.json(users);
-    } );
-  });
-
 // Events route ===========================================
-var eventsRouter = router.route('/event');
+var eventsRouter = router.route('/events');
 
 eventsRouter
   .get( function(req, res) {
-    Event.find(function() {
+    console.log('event api');
+    Event.find(function(err, events) {
       res.json(events);
     });
   });

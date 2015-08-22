@@ -1,9 +1,16 @@
-sochopApp.controller('LoginController', function ($scope, $location) {
+sochopApp.controller('LoginController', function ($scope, $location, sochopService) {
   // email pattern regex
   $scope.emailPattern = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
   // initialize user object with empty values
   $scope.user = {};
+
+  $scope.login = function() {
+    sochopService.logInService($scope.user);
+    if (sochopService.isLoggedIn) {
+      $location.path('/attend');
+    }
+  };
 
   // Validation -------------
   $scope.validate = function() {

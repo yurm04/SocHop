@@ -1,13 +1,12 @@
 <div class="attendContainer">
-  <div class="well well-lg col-md-5">
+  <div class="well well-lg col-md-5 event-list">
     <legend>Goin On Near You</legend>
     <div class="panel panel-primary" ng-repeat="event in events">
       <div class="panel-heading" ng-click="selectEvent($index)">{{event.name}}</div>
       <div class="panel-body">
         <p class="custom-label-location">{{event.location.name}}</p>
         <p><span class="custom-label">Description:</span> {{event.description}}</p>
-        <p><span class="custom-label">Date:</span> {{event.date | date: 'M/d h:mma'}}</p>
-        <p><span class="custom-label">Attending:</span> {{event.numAttending}}</p>
+        <p><span class="custom-label">Date:</span> {{event.startTime}}</p>
       </div>
     </div>
   </div>
